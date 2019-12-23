@@ -1,0 +1,9 @@
+#info {
+    opacity: 1;
+    /* visibility: visible; */
+
+}
+#info.fade {
+    /* visibility: hidden; */    
+    opacity: 0;
+}

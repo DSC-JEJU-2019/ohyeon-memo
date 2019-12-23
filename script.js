@@ -2,7 +2,24 @@ var loadButton = document.getElementById('load');
 var fileInput = document.getElementById('input-file');
 var saveButton = document.getElementById('save');
 var memoTextArea = document.getElementById('memo');
+var infoSpan = document.getElementById('info');
 
+var waitTime = 2000;
+var saveInfoTime = 3000;
+var interval;
+
+function autosave() {
+    infoSpan.className="fade";
+    console.log('hi');
+    if(interval) {
+        clearTimeout(interval);
+    }
+    interval = setTimeout(function() {
+        localStorage.setItem('data', memoTextArea.value);
+        infoSpan.className="";
+        console.log("저장 완료!")
+    }, waitTime);
+}
 
 function load() {
     fileInput.click();
@@ -35,3 +52,8 @@ function input() {
 loadButton.addEventListener('click', load);
 saveButton.addEventListener('click', save);
 fileInput.addEventListener('input', input);
+memoTextArea.addEventListener('input', autosave);
+
+
+var data = localStorage.getItem('data');
+if(!!data) memoTextArea.value = data;
